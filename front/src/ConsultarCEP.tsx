@@ -3,30 +3,63 @@
 //2 - O componente deve ser uma função
 //3 - O componente deve retornar apenas um elemento HTML
 //4 - Eu preciso exportar o componente
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-function ConsultarCEP(){
+function ConsultarCEP() {
+    // Definindo os estados para armazenar os dados
+    const [localidade, setLocalidade] = useState("");
+    const [estado, setEstado] = useState("");
+    const [logradouro, setLogradouro] = useState("");
+    const [cep, setCep] = useState("");
+
     useEffect(() =>{
         //evento de carregamento do componente 
         //executar código ao abrir carregar o componente
         //AXIOS - Biblioteca de requisições
+    })
 
+    function pesquisarCEP(){
         fetch("https://viacep.com.br/ws/01001000/json/")
-            .then(resposta => {
-                return resposta.json();
-            })
-            .then(endereco =>{
-                console.log(endereco.localidade);
-            });
-
+        .then((resposta) => resposta.json())
+        .then((endereco) => {
+            setLocalidade(endereco.localidade);
+            setLogradouro(endereco.logradouro);
+            setEstado(endereco.estado);
     });
 
-    return(
+    }
+    function sairFoco(){
+        ConsultarCEP();
+    }
+
+    function digitar() {
+        console.log("Digitei algo na caixa de texto");
+    }
+    function clicar(){
+
+    }
+
+    
+    return (
         <div>
-            <h1>ConsultarCEP</h1> 
+            <h1>Consultar CEP</h1>
+            <input
+                type="text"
+                placeholder="Digite o seu CEP"
+                onChange={digitar} // Apenas para detectar mudanças no input
+            />
+            <button onClick={pesquisarCEP}>Consultar CEP</button>
+
+            <p><strong>Localidade:</strong> {localidade}</p>
+            <p><strong>Estado:</strong> {estado}</p>
+            <p><strong>Logradouro:</strong> {logradouro}</p>
+            <p><strong>CEP:</strong> {cep}</p>
         </div>
     );
-}
+};
+
+
+
 
 export default ConsultarCEP;
 
