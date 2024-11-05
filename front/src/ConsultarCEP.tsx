@@ -54,6 +54,7 @@ function ConsultarCEP() {
             <p><strong>Estado:</strong> {estado}</p>
             <p><strong>Logradouro:</strong> {logradouro}</p>
             <p><strong>CEP:</strong> {cep}</p>
+            
         </div>
     );
 };
