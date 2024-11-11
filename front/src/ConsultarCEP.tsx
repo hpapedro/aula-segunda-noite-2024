@@ -18,54 +18,46 @@ function ConsultarCEP() {
         //AXIOS - Biblioteca de requisições
     })
 
-    function pesquisarCEP(){
-        fetch("https://viacep.com.br/ws/01001000/json/")
-        .then((resposta) => resposta.json())
-        .then((endereco) => {
+    function pesquisarCEP() {
+        fetch("https://viacep.com.br/ws/" + cep + "/json/")
+          .then((resposta) => resposta.json())
+          .then((endereco) => {
             setLocalidade(endereco.localidade);
             setLogradouro(endereco.logradouro);
             setEstado(endereco.estado);
-    });
-
-    }
+          });
+      }
     function sairFoco(){
-        ConsultarCEP();
+        pesquisarCEP();
     }
 
-    function digitar() {
-        console.log("Digitei algo na caixa de texto");
+    function digitar(event: any) {
+        setCep(event.target.value);
     }
     function clicar(){
-
+        pesquisarCEP();
     }
 
     
     return (
-        <div>
+        <div id="consultar_cep">
             <h1>Consultar CEP</h1>
+
             <input
                 type="text"
                 placeholder="Digite o seu CEP"
                 onChange={digitar} // Apenas para detectar mudanças no input
+                onBlur={sairFoco}
             />
             <button onClick={pesquisarCEP}>Consultar CEP</button>
 
-            <p><strong>Localidade:</strong> {localidade}</p>
-            <p><strong>Estado:</strong> {estado}</p>
-            <p><strong>Logradouro:</strong> {logradouro}</p>
-            <p><strong>CEP:</strong> {cep}</p>
+            <p> {localidade} </p>
+            <p> {estado} </p>
+            <p> {logradouro} </p>
+            <p> {localidade}    </p>
             
         </div>
     );
 };
 
-
-
-
 export default ConsultarCEP;
-
-//Exercicios 
-//1 - Exibir os dados no HTML/Página
-//2 - Realizar a requisição para a sua api
-//3 - Resolver o problema de CORS
-//4 - Exibir a lista de produtos no HTML

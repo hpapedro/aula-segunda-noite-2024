@@ -1,11 +1,13 @@
 import React from "react";
-import ComponenteExemplo from "./CompontenteExemplo";
 import ConsultarCEP from "./ConsultarCEP";
+import ComponenteExemplo from "./CompontenteExemplo";
+import ProdutoListar from "./ProdutoListar"
 
 function App() {
   return (
     <div>
-      <ConsultarCEP/>
+      {/*<ConsultarCEP/>*/}
+      <ProdutoListar />
     </div>
   );
 }
