@@ -18,6 +18,23 @@ function pesquisarProdutos(){
         setProdutos(produtos);
     });
 }
+
+function excluirProduto(id: string) {
+    fetch(`http://localhost:5085/api/produto/deletar/${id}`, {
+      method: "DELETE",
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          alert("Produto excluído com sucesso!");
+          // Atualizar a lista após exclusão
+          setProdutos(produtos.filter((produto) => produto.id !== id));
+        } else {
+          alert("Erro ao excluir o produto.");
+        }
+      })
+      .catch(() => alert("Falha ao conectar com o servidor."));
+  }
+
     return( 
     <div id="listar_produtos">
         <h1>Lista de Produtos</h1>
@@ -30,17 +47,23 @@ function pesquisarProdutos(){
                     <th>Quantidade</th>
                     <th>Valor</th>
                     <th>Criado em</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
             {produtos.map(produto => (
-            <tr>
+            <tr key={produto.id}>
                 <td>{produto.id}</td>
                 <td>{produto.nome}</td>
                 <td>{produto.descricao}</td>
                 <td>{produto.quantidade}</td>
                 <td>{produto.valor}</td>
                 <td>{produto.criadoEm}</td>
+                <td>
+                    <button onClick={() => excluirProduto(produto.id!)}>
+                        Excluir
+                    </button>
+                </td>
             </tr>
         ))} 
             </tbody>

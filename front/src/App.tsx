@@ -9,8 +9,9 @@ function App() {
   return (
     <div>
       {/*<ConsultarCEP/>*/}
-      {/*<ProdutoListar />*/}
       <ProdutoCadastrar/>
+      <ProdutoListar/>
+      
     </div>
   );
 }
